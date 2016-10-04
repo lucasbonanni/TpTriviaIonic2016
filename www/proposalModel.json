@@ -1,0 +1,91 @@
+{
+
+    "id": 5617521051,
+    "created": "10/04/2016 15:03:58 EST",
+    "last_turn": "10/04/2016 15:06:05 EST",
+    "expiration_date": "10/07/2016 15:06:05 EST",
+    "questions": [
+        {
+            "question": {
+                "id": 64931546,
+                "category": "SCIENCE",
+                "text": "¿Cuál de estos perros es el más grande?",
+                "answers": [
+                    "San Bernardo",
+                    "German Shepard",
+                    "Labrador",
+                    "Border Collie"
+                ],
+                "correct_answer": 0,
+                "media_type": "NORMAL",
+                "author": {
+                    "id": 171363178,
+                    "name": "madejmax",
+                    "username": "madejmax",
+                    "fb_show_picture": false,
+                    "fb_show_name": false
+                },
+                "translator": {
+                    "id": 218455249,
+                    "name": "cesarromeroivc",
+                    "username": "cesarromeroivc",
+                    "fb_show_picture": false,
+                    "fb_show_name": false
+                }
+            },
+            "powerup_question": {
+                "id": 17925203,
+                "category": "SCIENCE",
+                "text": "¿Cuál es el término correcto para la toxina que algunas serpientes inyectan cuándo muerden ?",
+                "answers": [
+                    "Posion ",
+                    "Veneno ",
+                    "Tinta ",
+                    "Toxina "
+                ],
+                "correct_answer": 1,
+                "media_type": "NORMAL",
+                "author": {
+                    "id": 82600044,
+                    "facebook_id": "",
+                    "name": "Kate Blandin",
+                    "username": "blandin.kate",
+                    "facebook_name": "Kate Blandin",
+                    "fb_show_picture": true,
+                    "fb_show_name": true
+                }
+            }
+        }
+    ],
+    "statistics": {
+        "player_one_statistics": {
+            "category_questions": [
+                {
+                    "category": "HISTORY",
+                    "correct": 1,
+                    "incorrect": 0,
+                    "worst": false
+                },
+                {
+                    "category": "GEOGRAPHY",
+                    "correct": 2,
+                    "incorrect": 0,
+                    "worst": false
+                },
+                {
+                    "category": "SPORTS",
+                    "correct": 1,
+                    "incorrect": 1,
+                    "worst": false
+                }
+            ],
+            "correct_answers": 4,
+            "incorrect_answers": 1,
+            "challenges_won": 0,
+            "questions_answered": 5,
+            "crowns_won": 1
+            }
+        }
+    }
+
+}
