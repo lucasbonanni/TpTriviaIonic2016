@@ -1,10 +1,13 @@
-app.controller('ExtensionsCtrl', function ($scope, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup, ionicMaterialInk, $cordovaVibration, $cordovaNativeAudio,
-     $cordovaFile) {
+app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio,$ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup) { 
 
-    var ctrl = $scope.ctrl = {};
-      ctrl.preguntaActual = 0;
-    ctrl.respuestasCorrectas = 0;
-    ctrl.respuestaSeleccionada = null;
+  /* ionicMaterialInk, $cordovaVibration,
+     $cordovaFile */
+
+     /*  
+        Sonidos funcionando - Deshabilitados para poder hacer debug los otros cordova plugins
+        Falta cambiar los sonidos
+     */
+
 
     var datosPartida = $scope.datosPartida = {};
     datosPartida.numeroPregunta = 0;
@@ -13,7 +16,13 @@ app.controller('ExtensionsCtrl', function ($scope, $stateParams, $ionicActionShe
     console.info("inicio - DatosPartida", datosPartida);
 
 
-    $scope.preguntas = {};
+
+
+/*    $scope.preguntas = {};
+    $ionicPlatform.ready(function() {
+      $cordovaNativeAudio.preloadSimple('wrong', 'sounds/wrong.mp3');
+      $cordovaNativeAudio.preloadSimple('correct', 'sounds/correct.mp3');
+    });*/
 
     $scope.preguntas = [
         {
@@ -65,7 +74,12 @@ app.controller('ExtensionsCtrl', function ($scope, $stateParams, $ionicActionShe
         console.info("verificaRespuesta - resp", resp);
         if($scope.preguntas[datosPartida.numeroPregunta].question.correct_answer === resp){
             console.info("inicio - DatosPartida", datosPartida);
+            /*$cordovaNativeAudio.play('correct');*/
                 datosPartida.numeroPregunta++;
+        }
+        else
+        {
+           /*$cordovaNativeAudio.play('wrong');*/
         }
     }
 

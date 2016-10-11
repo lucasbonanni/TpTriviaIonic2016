@@ -5,10 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ngCordova','ionic', 'ionic-material','firebase']);
 
-app.run(function ($ionicPlatform) {
+app.run(function ($ionicPlatform, $cordovaNativeAudio) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
+        /*$cordovaNativeAudio.preloadSimple('inc', 'sounds/wrong.mp3');
+        $cordovaNativeAudio.preloadSimple('corr', 'sounds/correct.mp3');*/
 
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
