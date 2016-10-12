@@ -1,4 +1,4 @@
-app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio,$ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup) { 
+app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup,$firebaseObject) { 
 
   /* ionicMaterialInk, $cordovaVibration,
      $cordovaFile */
@@ -8,6 +8,7 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio,$ionicPl
         Falta cambiar los sonidos
      */
 
+    //var database = new Firebase("");
 
     var datosPartida = $scope.datosPartida = {};
     datosPartida.numeroPregunta = 0;
@@ -24,44 +25,42 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio,$ionicPl
       $cordovaNativeAudio.preloadSimple('correct', 'sounds/correct.mp3');
     });*/
 
-    $scope.preguntas = [
-        {
-            "question": {
-                "text": "¿Cuál de estos perros es el más grande?",
-                "answers": [
-                    "San Bernardo",
-                    "German Shepard",
-                    "Labrador",
-                    "Border Collie"
-                ],
-                "correct_answer": 0,
-                "media_type": "NORMAL",
-                "author": {
-                    "name": "madejmax",
-                    "username": "madejmax",
-                    "fb_show_picture": false,
-                    "fb_show_name": false
-                }
-            }},{
-            "question": {
-                "text": "¿Cuál es el término correcto para la toxina que algunas serpientes inyectan cuándo muerden ?",
-                "answers": [
-                    "Posion ",
-                    "Veneno ",
-                    "Tinta ",
-                    "Toxina "
-                ],
-                "correct_answer": 1,
-                "media_type": "NORMAL",
-                "author": {
-                    "facebook_id": "",
-                    "name": "Kate Blandin",
-                    "username": "blandin.kate",
-                    "facebook_name": "Kate Blandin",
-                    "fb_show_picture": true,
-                    "fb_show_name": true
-                }
-            }
+    $scope.preguntas = [ {
+              "text": "¿Cuál de estos perros es el más grande?",
+              "answers": [
+                  "San Bernardo",
+                  "German Shepard",
+                  "Labrador",
+                  "Border Collie"
+              ],
+              "correct_answer": 0,
+              "media_type": "NORMAL",
+              "author": {
+                  "name": "madejmax",
+                  "username": "madejmax",
+                  "fb_show_picture": false,
+                  "fb_show_name": false
+              }
+            }, 
+            {
+              "text": "¿Cuál es el término correcto para la toxina que algunas serpientes inyectan cuándo muerden ?",
+              "answers": [
+                  "Posion ",
+                  "Veneno ",
+                  "Tinta ",
+                  "Toxina "
+              ],
+              "correct_answer": 1,
+              "media_type": "NORMAL",
+              "author": {
+                  "facebook_id": "",
+                  "name": "Kate Blandin",
+                  "username": "blandin.kate",
+                  "facebook_name": "Kate Blandin",
+                  "fb_show_picture": true,
+                  "fb_show_name": true
+              }
+            
         }
     ];
 
@@ -69,10 +68,10 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio,$ionicPl
 
     $scope.verificaRespuesta = function($respuesta){
         console.info("verificaRespuesta - DatosPartida", datosPartida);
-        var resp = $scope.preguntas[datosPartida.numeroPregunta].question
-                    .answers.indexOf($respuesta);
+        var resp = $scope.preguntas[datosPartida.numeroPregunta]                    
+        .answers.indexOf($respuesta);
         console.info("verificaRespuesta - resp", resp);
-        if($scope.preguntas[datosPartida.numeroPregunta].question.correct_answer === resp){
+        if($scope.preguntas[datosPartida.numeroPregunta].correct_answer === resp){
             console.info("inicio - DatosPartida", datosPartida);
             /*$cordovaNativeAudio.play('correct');*/
                 datosPartida.numeroPregunta++;

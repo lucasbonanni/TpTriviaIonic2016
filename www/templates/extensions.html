@@ -8,12 +8,12 @@
         </div>
     </div>
     <div class="row">
-        <center><p>{{preguntas[datosPartida.numeroPregunta].question.text}}</p></center>
+        <center><p>{{preguntas[datosPartida.numeroPregunta].text}}</p></center>
     </div>
 
     <div class="list">
-      <div class="row" ng-model="preguntas" ng-repeat="respuesta in preguntas[datosPartida.numeroPregunta].question.answers">
-        <button class="button button-full button-assertive" ng-click="verificaRespuesta(respuesta)">{{respuesta}}
+      <div class="row" ng-model="preguntas" ng-repeat="respuesta in preguntas[datosPartida.numeroPregunta].answers">
+        <button class="button button-block button-royal" ng-click="verificaRespuesta(respuesta)">{{respuesta}}
         </button>
       </div>
     </div>    
