@@ -5,7 +5,17 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ngCordova','ionic', 'ionic-material','firebase']);
 
-app.run(function ($ionicPlatform, $cordovaNativeAudio) {
+app.run(function ($ionicPlatform, $cordovaNativeAudio,$rootScope, $state) {
+
+/*
+    $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+    // We can catch the error thrown when the $requireSignIn promise is rejected
+    // and redirect the user back to the home page
+    if (error === "AUTH_REQUIRED") {
+      $state.go('app.components');
+    }
+  });*/
+
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)

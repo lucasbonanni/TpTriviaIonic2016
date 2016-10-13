@@ -42,12 +42,12 @@
 
         firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-        // User is signed in.
-        $scope.loginData.isActive= true;
+            // User is signed in.
+            $scope.loginData.isActive= true;
         } else {
-        // No user is signed in.
-        $scope.loginData.isActive= false;
-        $scope.login();
+            // No user is signed in.
+            $scope.loginData.isActive= false;
+            $scope.login();
         }
         });
 

@@ -1,4 +1,4 @@
-app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup,$firebaseObject) { 
+app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup, $firebaseObject,$cordovaFile) { 
 
   /* ionicMaterialInk, $cordovaVibration,
      $cordovaFile */
@@ -16,7 +16,9 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
     datosPartida.respuestasIncorrectas = 0;
     console.info("inicio - DatosPartida", datosPartida);
 
-
+    var gameActivity = new Array();
+      var ref = firebase.database();
+      console.info("referencia",$firebaseObject);
 
 
 /*    $scope.preguntas = {};
@@ -61,6 +63,86 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
                   "fb_show_name": true
               }
             
+        },
+        {
+              "text": "¿Qué enfermedad trajeron los españoles a Nueva España?",
+              "answers": [
+                "Epidemia de viruela",
+                "Cáncer",
+                "Diarrea",
+                "Tos"
+            ],
+              "correct_answer": 0,
+              "media_type": "NORMAL",
+              "author": {
+                  "facebook_id": "",
+                  "name": "Kate Blandin",
+                  "username": "blandin.kate",
+                  "facebook_name": "Kate Blandin",
+                  "fb_show_picture": true,
+                  "fb_show_name": true
+              }
+            
+        },
+        {
+              "text": "¿Quién dijo: \"I have a dream\" (\"Yo tengo un sueño\")?",
+              "answers": [
+                  "Rosa Parks",
+                  "Malcolm X",
+                  "Martin Luther King Jr.",
+                  "Thurgood Marshall"
+              ],
+              "correct_answer": 2,
+              "media_type": "NORMAL",
+              "author": {
+                  "facebook_id": "",
+                  "name": "Kate Blandin",
+                  "username": "blandin.kate",
+                  "facebook_name": "Kate Blandin",
+                  "fb_show_picture": true,
+                  "fb_show_name": true
+              }
+            
+        },
+        {
+              "text": "¿Qué es el \"Sahara\" ubicado en el continente Africano?",
+              "answers": [
+                "Un desierto",
+                "Un monumento",
+                "Una localidad",
+                "Un río"
+             ],
+              "correct_answer": 0,
+              "media_type": "NORMAL",
+              "author": {
+                  "facebook_id": "",
+                  "name": "Kate Blandin",
+                  "username": "blandin.kate",
+                  "facebook_name": "Kate Blandin",
+                  "fb_show_picture": true,
+                  "fb_show_name": true
+              }
+            
+        },
+        {
+              "text": "¿En dónde se encuentra la ciudad de Las Flores?",
+              "answers": [
+                "Provincia de Buenos Aires",
+                "Provincia de Córdoba",
+                "Provincia de Salta",
+                "Ninguna de las anteriores"
+            ],
+              "correct_answer": 0,
+              "media_type": "NORMAL",
+              "author": {
+                  "facebook_id": "",
+                  "name": "Kate Blandin",
+                  "username": "blandin.kate",
+                  "facebook_name": "Kate Blandin",
+                  "fb_show_picture": true,
+                  "fb_show_name": true
+              }
+            
         }
     ];
 
@@ -75,135 +157,36 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
             console.info("inicio - DatosPartida", datosPartida);
             /*$cordovaNativeAudio.play('correct');*/
                 datosPartida.numeroPregunta++;
+            var result = {};
+           result.pregunta = $scope.preguntas[datosPartida.numeroPregunta].text;
+           result.respuesta = $respuesta;
+           result.incorrecta = $scope.preguntas[datosPartida.numeroPregunta].correct_answer === resp;
+           gameActivity.push(result);
+           $cordovaFile.writeFile(cordova.file.dataDirectory, "some_file.json", gameActivity, true)
+            .then(function (success) {
+              // success
+            }, function (error) {
+              // error
+              alert(error);
+            });
         }
         else
         {
            /*$cordovaNativeAudio.play('wrong');*/
+           var result = {};
+           result.pregunta = $scope.preguntas[datosPartida.numeroPregunta].text;
+           result.respuesta = $respuesta;
+           result.incorrecta = $scope.preguntas[datosPartida.numeroPregunta].correct_answer === resp;
+           gameActivity.push(result);
+
+           $cordovaFile.writeFile(cordova.file.dataDirectory, "some_file.json", gameActivity, true)
+            .then(function (success) {
+              // success
+            }, function (error) {
+              // error
+              alert(error);
+            });
         }
     }
 
-    /*$scope.preguntas = [{
-        pregunta: 1,
-        img: 'img/atom.jpg',
-        descripcionPregunta: "Cual es el numero at\u00f3mico del hidr\u00f3geno?",
-        respuestas: [{
-          id: 1,
-          name: '1',
-          active: true
-        }, {
-            id: 2,
-            name: '24',
-            active: false
-          }, {
-            id: 3,
-            name: '12',
-            active: false
-          }]
-      }, {
-          pregunta: 2,
-          img: 'img/programming.jpg',
-          descripcionPregunta: "Cual de estos lenguajes fue inventado en los laboratorios Bell?",
-          respuestas: [{
-            id: 1,
-            name: 'C',
-            active: true
-          }, {
-              id: 2,
-              name: 'Basic',
-              active: false
-            }, {
-              id: 3,
-              name: 'Cobol',
-              active: false
-            }]
-        }, {
-          pregunta: 3,
-          img: 'img/sun.jpg',
-          descripcionPregunta: "Que tipo de rayos broncean la piel?",
-          respuestas: [{
-            id: 1,
-            name: 'Infrarrojo',
-            active: false
-          }, {
-              id: 2,
-              name: 'Gamma',
-              active: false
-            }, {
-              id: 3,
-              name: 'Ultravioleta',
-              active: true
-            }]
-        }, {
-          pregunta: 4,
-          img: 'img/stars.jpg',
-          descripcionPregunta: "Cual es la escala que mide el brillo de las estrellas?",
-          respuestas: [{
-            id: 1,
-            name: 'Magnitud',
-            active: true
-          }, {
-              id: 2,
-              name: 'Alboreda',
-              active: false
-            }, {
-              id: 3,
-              name: 'Densidad',
-              active: false
-            }]
-        },
-        {
-          pregunta: 5,
-          img: 'img/electronic.jpg',
-          descripcionPregunta: "En electronica, cual es el nombre del componente que consiste de dos platos separados por un dialectrico y puede almacenar una carga?",
-          respuestas: [{
-            id: 1,
-            name: 'Transformador',
-            active: false
-          }, {
-              id: 2,
-              name: 'Inductor',
-              active: false
-            }, {
-              id: 3,
-              name: 'Capacitor',
-              active: true            
-            }]
-        },
-        {
-          pregunta: 6,
-          img: 'img/higrometro.jpg',
-          descripcionPregunta: "Que mide un higrometro?",
-          respuestas: [{
-            id: 1,
-            name: 'Terremotos',
-            active: false
-          }, {
-              id: 2,
-              name: 'Humedad',
-              active: true
-            }, {
-              id: 3,
-              name: 'Presion',
-              active: false
-            }]
-        },
-        {
-          pregunta: 7,
-          img: 'img/flower.jpg',
-          descripcionPregunta: "La parte masculina de una flor es...",
-          respuestas: [{
-            id: 1,
-            name: 'Estigma',
-            active: false
-          }, {
-              id: 2,
-              name: 'Pistillo',
-              active: false
-            }, {
-              id: 3,
-              name: 'Estambre',
-              active: true
-            }]
-        }
-      ];*/
 });
