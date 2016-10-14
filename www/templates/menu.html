@@ -24,7 +24,13 @@
             </div>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
-            <ion-list>
+                <ion-list>
+                <ion-item menu-close ng-click="login()" ng-model="scope.loginData.isActive" ng-if="!loginData.isActive">
+                Login
+                </ion-item>
+                <ion-item menu-close ng-click="login()" ng-model="scope.loginData.isActive" ng-if="loginData.isActive">
+                Perfil
+                </ion-item>
                 <ion-item nav-clear menu-close href="#/app/components">
                     Components+
                 </ion-item>

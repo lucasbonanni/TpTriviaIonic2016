@@ -9,7 +9,7 @@
         navIcons.addEventListener('click', function () {
             this.classList.toggle('active');
         });
-    }
+    };
 
     $scope.$on('$ionicView.beforeEnter', function(event,data){
         $ionicLoading.show({
@@ -22,25 +22,26 @@
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-    }).then(function(modal) {
-    $scope.modal = modal;
+        scope: $scope
+        }).then(function(modal) {
+        $scope.modal = modal;
     });
 
     // Triggered in the login modal to close it
     $scope.closeLogin = function() {
-    $scope.modal.hide();
+        $scope.modal.hide();
     };
 
     // Open the login modal
     $scope.login = function() {
-    $scope.modal.show();
+        $scope.modal.show();
     };
 
 
     $scope.$on('$ionicView.enter', function(event,data) {
-
+        //console.log("ionic enter event");
         firebase.auth().onAuthStateChanged(function(user) {
+        //console.info("user",user);
         if (user) {
             // User is signed in.
             $scope.loginData.isActive= true;
@@ -50,10 +51,10 @@
             $scope.login();
         }
         });
-
-        //console.info("event",event);
-        //console.info("data",data);
-        //console.log('enter state');
+        /*
+        console.info("event",event);
+        console.info("data",data);
+        console.log('enter state');*/
     });
 
     $scope.doLogout = function(){
@@ -61,32 +62,44 @@
     }
 
 
-    $scope.loginData.username = "username";
-    $scope.loginData.password = "password";
+    
 
+ // Perform the login action when the user submits the login form
+  $scope.doLogin = function() {
+    //console.log('Doing login', $scope.loginData);
+
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    //Test  variables Set up
+    $scope.loginData.username = "user";
+    $scope.loginData.password = "password";
 
     firebase.auth()
     .signInWithEmailAndPassword($scope.loginData.username, $scope.loginData.password)
-    .then(function(success){
+    .then( function(success){
 
-        $scope.usuario = firebase.auth().currentUser;
+       $scope.usuario = firebase.auth().currentUser;
 
         //console.info("success",success);
         $scope.loginData.isActive= true;
 
         /*http://lorempixel.com/90/90/people/*/
         $scope.usuario.updateProfile({
-            displayName: "displayName",
-            photoURL: "http://lorempixel.com/90/90/people"
+          displayName: "displayName",
+          photoURL: "http://lorempixel.com/90/90/people"
         });
         $scope.closeLogin();
-            console.info("usuario",$scope.usuario);
-        }, 
-        function(error){
-            $scope.loginData.isActive= false;
-            console.info("error",error);
+        console.info("usuario",$scope.usuario);
+    }, function(error){
+      $scope.loginData.isActive= false;
+      console.info("error",error);
 
     });
+
+    /*$timeout(function() {
+      $scope.closeLogin();
+    }, 1000);*/
+};
 
 
 
