@@ -1,4 +1,4 @@
-app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup, $firebaseObject,$cordovaFile) { 
+app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicPlatform, $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup, $firebaseObject,$cordovaFile,$firebaseArray) { 
 
   /* ionicMaterialInk, $cordovaVibration,
      $cordovaFile */
@@ -9,6 +9,38 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
      */
 
     //var database = new Firebase("");
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = firebase.storage();
+
+    // Create a storage reference from our storage service
+    var storageRef = storage.ref();
+
+
+    // Root allows us to move all the way back to the top of our bucket
+    //var rootRef = spaceRef.root;
+    console.info("root ref",storageRef);
+
+    var rutaPrincipal = storageRef.child('posts').bucket;
+    var rutapreguntas = "https://loginfirebase-b01c4.firebaseio.com/posts";
+
+    var username = {};
+    
+    var ref = firebase.database().ref('posts').once('value').then(function(snapshot) {
+      username = snapshot.val();
+    console.info("username",username);
+    });
+    var list = $firebaseArray(username);
+    console.info("ref preguntas",ref);
+    var element = username[0];
+    console.info("element",element);
+
+    /*
+    var traerPreguntas = firebase.database().ref('posts').limitToLast(100);
+    console.info("traer preguntas",traerPreguntas );*/
+
+
+    //var list = $firebaseArray(ref);
+    //console.info("lista",list);
 
     var datosPartida = $scope.datosPartida = {};
     datosPartida.numeroPregunta = 0;
@@ -17,8 +49,8 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
     console.info("inicio - DatosPartida", datosPartida);
 
     var gameActivity = new Array();
-      var ref = firebase.database();
-      console.info("referencia",$firebaseObject);
+//      var ref = firebase.database();
+  //    console.info("referencia",$firebaseObject);
 
 
 /*    $scope.preguntas = {};
@@ -27,124 +59,18 @@ app.controller('ExtensionsCtrl', function ($scope,  $cordovaNativeAudio, $ionicP
       $cordovaNativeAudio.preloadSimple('correct', 'sounds/correct.mp3');
     });*/
 
-    $scope.preguntas = [ {
-              "text": "¿Cuál de estos perros es el más grande?",
-              "answers": [
-                  "San Bernardo",
-                  "German Shepard",
-                  "Labrador",
-                  "Border Collie"
-              ],
-              "correct_answer": 0,
-              "media_type": "NORMAL",
-              "author": {
-                  "name": "madejmax",
-                  "username": "madejmax",
-                  "fb_show_picture": false,
-                  "fb_show_name": false
-              }
-            }, 
-            {
-              "text": "¿Cuál es el término correcto para la toxina que algunas serpientes inyectan cuándo muerden ?",
-              "answers": [
-                  "Posion ",
-                  "Veneno ",
-                  "Tinta ",
-                  "Toxina "
-              ],
-              "correct_answer": 1,
-              "media_type": "NORMAL",
-              "author": {
-                  "facebook_id": "",
-                  "name": "Kate Blandin",
-                  "username": "blandin.kate",
-                  "facebook_name": "Kate Blandin",
-                  "fb_show_picture": true,
-                  "fb_show_name": true
-              }
-            
-        },
-        {
-              "text": "¿Qué enfermedad trajeron los españoles a Nueva España?",
-              "answers": [
-                "Epidemia de viruela",
-                "Cáncer",
-                "Diarrea",
-                "Tos"
-            ],
-              "correct_answer": 0,
-              "media_type": "NORMAL",
-              "author": {
-                  "facebook_id": "",
-                  "name": "Kate Blandin",
-                  "username": "blandin.kate",
-                  "facebook_name": "Kate Blandin",
-                  "fb_show_picture": true,
-                  "fb_show_name": true
-              }
-            
-        },
-        {
-              "text": "¿Quién dijo: \"I have a dream\" (\"Yo tengo un sueño\")?",
-              "answers": [
-                  "Rosa Parks",
-                  "Malcolm X",
-                  "Martin Luther King Jr.",
-                  "Thurgood Marshall"
-              ],
-              "correct_answer": 2,
-              "media_type": "NORMAL",
-              "author": {
-                  "facebook_id": "",
-                  "name": "Kate Blandin",
-                  "username": "blandin.kate",
-                  "facebook_name": "Kate Blandin",
-                  "fb_show_picture": true,
-                  "fb_show_name": true
-              }
-            
-        },
-        {
-              "text": "¿Qué es el \"Sahara\" ubicado en el continente Africano?",
-              "answers": [
-                "Un desierto",
-                "Un monumento",
-                "Una localidad",
-                "Un río"
-             ],
-              "correct_answer": 0,
-              "media_type": "NORMAL",
-              "author": {
-                  "facebook_id": "",
-                  "name": "Kate Blandin",
-                  "username": "blandin.kate",
-                  "facebook_name": "Kate Blandin",
-                  "fb_show_picture": true,
-                  "fb_show_name": true
-              }
-            
-        },
-        {
-              "text": "¿En dónde se encuentra la ciudad de Las Flores?",
-              "answers": [
-                "Provincia de Buenos Aires",
-                "Provincia de Córdoba",
-                "Provincia de Salta",
-                "Ninguna de las anteriores"
-            ],
-              "correct_answer": 0,
-              "media_type": "NORMAL",
-              "author": {
-                  "facebook_id": "",
-                  "name": "Kate Blandin",
-                  "username": "blandin.kate",
-                  "facebook_name": "Kate Blandin",
-                  "fb_show_picture": true,
-                  "fb_show_name": true
-              }
-            
-        }
-    ];
+    //$scope.preguntas = ;
+
+/*
+    for (var i = $scope.preguntas.length - 1; i >= 0; i--) {
+      //firebase.push($scope.preguntas[i]);
+      firebase.database().ref().child('posts').push($scope.preguntas[i]).then(function(success){
+        console.log("push con exito");
+      },function(error){
+        console.info("error push",error);
+      });
+    }
+*/
 
     console.info("inicio - preguntas", $scope.preguntas);
 

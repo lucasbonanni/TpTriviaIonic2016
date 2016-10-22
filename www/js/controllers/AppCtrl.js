@@ -71,8 +71,8 @@
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     //Test  variables Set up
-    $scope.loginData.username = "user";
-    $scope.loginData.password = "password";
+    /*$scope.loginData.username = "user";
+    $scope.loginData.password = "password"; */
 
     firebase.auth()
     .signInWithEmailAndPassword($scope.loginData.username, $scope.loginData.password)
@@ -84,10 +84,10 @@
         $scope.loginData.isActive= true;
 
         /*http://lorempixel.com/90/90/people/*/
-        $scope.usuario.updateProfile({
+        /*$scope.usuario.updateProfile({
           displayName: "displayName",
           photoURL: "http://lorempixel.com/90/90/people"
-        });
+        });*/
         $scope.closeLogin();
         console.info("usuario",$scope.usuario);
     }, function(error){
